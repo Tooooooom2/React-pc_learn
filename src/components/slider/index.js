@@ -1,18 +1,37 @@
-// swpier 6.x 版本的写法
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import React from 'react'
+
+// 引入自定义的css组件
+import { SliderContainer, RedDiv } from './style'
+
+// swpier 6.x 版本 【 Swiper-React-Components 】
+// 引入Swiper-React-Components核心模块(自动生效)
+import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
-// 自定义的css组件
-import { SliderContainer,RedDiv } from './style';
+
+// Swiper-React-Components 其他模块的引入
+import SwiperCore, { Pagination, Autoplay } from 'swiper'
+
+// Swiper-React-Components 其他模块的使用
+SwiperCore.use([Pagination, Autoplay])
 
 function Slider(props) {
   const { bannerList } = props
+
   return (
     <Swiper
-      spaceBetween={0} // slide的间距
-      slidesPerView={1} // slider容器同时显示的slide数量
-      onSlideChange={() => console.log('slide change')} // 切换slide触发
-      onSwiper={(swiper) => console.log(swiper)}
+        onSlideChange={() => console.log('slide change')} // 切换slide触发
+        onSwiper={(swiper) => console.log(swiper)}
+        slidesPerView={1} // slider容器同时显示的slide数量
+        spaceBetween={0} // slide的间距
+        autoplay={{
+        delay: 3000, // 切换间隔
+        stopOnLastSlide: false, // 到最后一个停止
+        disableOnInteraction: false // 用户操作过后是否中止autoplay
+      }}
+      //   pagination={{
+      //   el: '.swiper-pagination',
+      //   type: 'progressbar' // 进度条模式需要在el样式中设置高度
+      // }}
     >
       <RedDiv />
       {
@@ -22,15 +41,23 @@ function Slider(props) {
             <SwiperSlide key={slider.imageUrl + '_' + i}>
               <SliderContainer>
                 <div className="ImgDiv">
-                  <img className='theImg' src={slider.imageUrl} width="100%" height="100%" alt="推荐" />
+                  <img alt="推荐"
+                      className="theImg"
+                      height="100%"
+                      src={require('@/assets/image/' + slider.imageUrl).default}
+                    // src={require('@/assets/image/111.jpg').default}
+                    // src={'http://p1.music.126.net/ZYLJ2oZn74yUz5x8NBGkVA==/109951164331219056.jpg'}
+                      width="100%"
+                  />
                 </div>
+                <div className="swiper-pagination"></div>
               </SliderContainer>
             </SwiperSlide>
-          );
+          )
         })
       }
     </Swiper>
-  );
+  )
 }
 
-export default React.memo(Slider);
+export default React.memo(Slider)
