@@ -1,60 +1,36 @@
-import React, { useEffect, useState } from 'react'
-import { SliderContainer } from './style'
-// import "swiper/css/swiper.css";
-import Swiper from 'swiper'
+// swpier 6.x 版本的写法
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.min.css'
+// 自定义的css组件
+import { SliderContainer,RedDiv } from './style';
 
 function Slider(props) {
-
-  console.log(props)
-
-  const [sliderSwiper, setSliderSwiper] = useState(null)
-
-  console.log(sliderSwiper)
-  console.log(setSliderSwiper)
-
   const { bannerList } = props
-
-  useEffect(() => {
-    if (bannerList.length && !sliderSwiper) {
-      let newSliderSwiper = new Swiper('.slider-container', {
-        loop: true,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false
-        },
-        pagination: { el: '.swiper-pagination' }
-      })
-      setSliderSwiper(newSliderSwiper)
-    }
-  }, [bannerList.length, sliderSwiper])
-
   return (
-    <SliderContainer>
-      <div className="slider-container">
-        <div className="swiper-wrapper">
-          {
-            bannerList.map((slider, i) => {
-              return (
-                <div className="swiper-slide"
-                    key={slider.imageUrl + '_' + i}
-                >
-                  <div className="slider-nav">
-                    <img alt="推荐"
-                        height="100%"
-                        key={slider.imageUrl + '_' + i + '_' + i}
-                        src={slider.imageUrl}
-                        width="100%"
-                    />
-                  </div>
+    <Swiper
+      spaceBetween={0} // slide的间距
+      slidesPerView={1} // slider容器同时显示的slide数量
+      onSlideChange={() => console.log('slide change')} // 切换slide触发
+      onSwiper={(swiper) => console.log(swiper)}
+    >
+      <RedDiv />
+      {
+        bannerList.map((slider, i) => {
+          return (
+            // 这里要修改key，否则多个用同一个图片的话会报错key重复
+            <SwiperSlide key={slider.imageUrl + '_' + i}>
+              <SliderContainer>
+                <div className="ImgDiv">
+                  <img className='theImg' src={slider.imageUrl} width="100%" height="100%" alt="推荐" />
                 </div>
-              )
-            })
-          }
-        </div>
-        <div className="swiper-pagination"></div>
-      </div>
-    </SliderContainer>
-  )
+              </SliderContainer>
+            </SwiperSlide>
+          );
+        })
+      }
+    </Swiper>
+  );
 }
 
-export default React.memo(Slider)
+export default React.memo(Slider);

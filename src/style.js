@@ -1,3 +1,5 @@
+// 全局样式，用【styled-components】组件将css绑定作为特殊dom使用，导出到App.js中
+
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
