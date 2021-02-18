@@ -17,17 +17,23 @@ function Home(props) {
         <span className="iconfont search">&#xe64b;</span>
       </Top>
       <Tab>
-        <NavLink to="/recommend" activeClassName="selected">
+        <NavLink to="/recommend"
+            activeClassName="selected"
+        >
           <TabItem>
             <span > 推荐 </span>
-          </TabItem>
+          </TabItem>Î
         </NavLink>
-        <NavLink to="/singers" activeClassName="selected">
+        <NavLink to="/singers"
+            activeClassName="selected"
+        >
           <TabItem>
             <span > 歌手 </span>
           </TabItem>
         </NavLink>
-        <NavLink to="/rank" activeClassName="selected">
+        <NavLink to="/rank"
+            activeClassName="selected"
+        >
           <TabItem>
             <span > 排行榜 </span>
           </TabItem>
