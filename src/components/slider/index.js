@@ -24,7 +24,7 @@ function Slider(props) {
         slidesPerView={1} // slider容器同时显示的slide数量
         spaceBetween={0} // slide的间距
         autoplay={{
-        delay: 3000, // 切换间隔
+        delay: 5000, // 切换间隔
         stopOnLastSlide: false, // 到最后一个停止
         disableOnInteraction: false // 用户操作过后是否中止autoplay
       }}
