@@ -1,16 +1,20 @@
 import React from 'react'
-import LogProps from '../LogProps'
 
-function Example() {
-  return (
-    <div>
-      <p>这是页面 Example</p>
-      <LogProps>23333</LogProps>
-    </div>
-  )
+class Example extends React.Component {
+
+  constructor(props) {
+    super(props)
+  }
+
+  laugh(){
+    console.log('【子页面】laugh方法 haha')
+  }
+
+  render() {
+    return (
+      <p>这是子页面</p>
+    )
+  }
 }
 
-// export default React.memo(Example)
-
-// 返回的是高阶组件包裹自己
 export default React.memo(Example)
