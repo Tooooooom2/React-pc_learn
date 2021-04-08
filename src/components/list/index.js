@@ -7,6 +7,9 @@ import {
 } from './style'
 
 function RecommendList (props) {
+
+  console.log('传给RecommendList props=', props)
+
   return (
     <ListWrapper>
       <h1 className="title"> 推荐歌单 </h1>

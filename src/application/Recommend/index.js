@@ -2,7 +2,7 @@ import React from 'react'
 import Slider from '@/components/slider'
 import RecommendList from '@/components/list'
 
-import Scroll from '../../baseUI/scroll/index'
+import Scroll from '@/baseUI/scroll/index'
 import {Content} from './style'
 
 function Recommend() {
@@ -25,6 +25,12 @@ function Recommend() {
     '陶喆',
     '游鸿明',
     '马天宇',
+    '谭咏麟',
+    '陈楚生',
+    '罗志祥',
+    '陶喆',
+    '游鸿明',
+    '马天宇',
     '谭咏麟'
   ]
   const recommendList = nameList.map((item,i) => {
@@ -41,8 +47,8 @@ function Recommend() {
     <Content>
       <Scroll>
         <div>
-        <Slider bannerList={bannerList}></Slider>
-        <RecommendList recommendList={recommendList}></RecommendList>
+          <Slider bannerList={bannerList}></Slider>
+          <RecommendList recommendList={recommendList}></RecommendList>
         </div>
       </Scroll>
     </Content>

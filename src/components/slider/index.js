@@ -17,6 +17,8 @@ SwiperCore.use([Pagination, Autoplay])
 function Slider(props) {
   const { bannerList } = props
 
+  console.log('传给slider props=', props)
+
   return (
     <Swiper
         onSlideChange={() => console.log('slide change')} // 切换slide触发
@@ -28,11 +30,12 @@ function Slider(props) {
         stopOnLastSlide: false, // 到最后一个停止
         disableOnInteraction: false // 用户操作过后是否中止autoplay
       }}
-      //   pagination={{
-      //   el: '.swiper-pagination',
-      //   type: 'progressbar' // 进度条模式需要在el样式中设置高度
-      // }}
+    //   pagination={{
+    //   el: '.swiper-pagination',
+    //   type: 'progressbar' // 进度条模式需要在el样式中设置高度
+    // }}
     >
+      {/* RedDiv 模拟的红色背景 */}
       <RedDiv />
       {
         bannerList.map((slider, i) => {
