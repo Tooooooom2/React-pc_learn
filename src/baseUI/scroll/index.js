@@ -20,8 +20,7 @@ const Scroll = forwardRef((props, ref) => {
   // 传入的具体dom对象
   const scrollContaninerRef = useRef()
 
-  console.log('【scroll】获取到整体ref对象 scrollContaninerRef=', scrollContaninerRef)
-  console.log('具体对象=scrollContaninerRef.current', scrollContaninerRef.current)
+  console.log('【scroll】获取到存入数据 scrollContaninerRef =', scrollContaninerRef)
 
   // 拆解props
   const { direction, click, refresh, bounceTop, bounceBottom } = props
@@ -113,9 +112,9 @@ const Scroll = forwardRef((props, ref) => {
   )
 })
 
-// 配置项
+// props类型检查
 Scroll.propTypes = {
-  direction: PropTypes.oneOf(['vertical', 'horizental']),// 滚动的方向
+  direction: PropTypes.oneOf(['vertical', 'horizontal']),// 滚动的方向
   click: PropTypes.bool,// 是否支持点击
   refresh: PropTypes.bool,// 是否刷新
   onScroll: PropTypes.func,// 滑动触发的回调函数
@@ -127,7 +126,7 @@ Scroll.propTypes = {
   bounceBottom: PropTypes.bool// 是否支持向下吸底
 }
 
-// 默认值
+// props默认值
 Scroll.defaultProps = {
   direction: 'vertical',
   click: true,

@@ -1,20 +1,12 @@
 import React from 'react'
 
-class Example extends React.Component {
-
-  constructor(props) {
-    super(props)
-  }
-
-  laugh(){
-    console.log('【子页面】laugh方法 haha')
-  }
-
-  render() {
-    return (
-      <p>这是子页面</p>
-    )
-  }
-}
+const Example = React.forwardRef((props, ref) => (
+  <div>
+    <input ref={ref}
+        type="text"
+    />
+    <button>{props.children}</button>
+  </div>
+))
 
 export default React.memo(Example)

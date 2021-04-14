@@ -3,7 +3,7 @@ import style from '@/assets/global-style'
 
 export const ListWrapper = styled.div`
   max-width: 100%;
-  padding-bottom:132.47px;
+  padding-bottom:132.47px; // 留下上面轮播图的高度
   .title {
     font-weight: 700;
     padding-left: 6px;

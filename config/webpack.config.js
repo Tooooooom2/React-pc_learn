@@ -190,6 +190,8 @@ module.exports = function (webpackEnv) {
           ]
         : paths.appIndexJs,
     output: {
+      // // publicPath设为/，通知webpack每次从根目录开始，【解决history模式，发布包在apache服务刷新页面问题（1/2）】
+      // publicPath:'/',
       // The build folder.
       path: isEnvProduction ? paths.appBuild : undefined,
       // Add /* filename */ comments to generated require()s in the output.

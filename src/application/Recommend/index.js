@@ -1,9 +1,9 @@
 import React from 'react'
-import Slider from '@/components/slider'
-import RecommendList from '@/components/list'
+import Slider from '@/components/slider' // 轮播图
+import RecommendList from '@/components/list' // 推荐列表
 
-import Scroll from '@/baseUI/scroll/index'
-import {Content} from './style'
+import Scroll from '@/baseUI/scroll/index' // 移动端滑动组件
+import {Content} from './style' // 移动端滑动组件 外部包裹一层dom
 
 function Recommend() {
 
