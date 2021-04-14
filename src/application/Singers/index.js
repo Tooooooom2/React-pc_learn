@@ -1,44 +1,37 @@
 
-import React from 'react'
+import React, { Profiler } from 'react'
 
-function Haha() {
+function Parent() {
+
+  function onRenderCallback(...args) {
+    console.log('Profiler整体传参   ', args)
+    console.log('[id]              ', args[0])
+    console.log('[phase]           ', args[1])
+    console.log('[actualDuration]  ', args[2])
+    console.log('[baseDuration]    ', args[3])
+    console.log('[startTime]       ', args[4])
+    console.log('[commitTime]      ', args[5])
+    console.log('[interactions]    ', args[6])
+  }
+
   return (
-      <Toggle>
-        <Imerror></Imerror>
-      </Toggle>
+    <div>
+      <Profiler id="theFirst"
+          onRender={onRenderCallback}
+      >
+        <Child />
+      </Profiler>
+    </div>
   )
 }
 
-function Imerror(){
-  let cc = 'haha'
+function Child() {
   return (
-    <p>{cc[120].haha}</p>
+    <div>
+      <button>Click</button>
+    </div>
   )
 }
 
-class Toggle extends React.Component {
-  static getDerivedStateFromError(error) {
-    // 更新 state 使下一次渲染能够显示降级后的 UI
-    console.log(error)
-    return { hasError: true }
-  }
-  constructor(props) {
-    super(props)
-    this.state = { hasError: false }
-  }
-  componentDidCatch(error, errorInfo) {
-    // 你同样可以将错误日志上报给服务器
-    console.log(error, errorInfo)
-    // logErrorToMyService(error, errorInfo)
-  }
-  render() {
-    if (this.state.hasError) {
-      // 你可以自定义降级后的 UI 并渲染
-      return <h1>里面的组件有报错，这是备用显示的内容</h1>
-    }
-    return this.props.children
-  }
-}
-
-export default React.memo(Haha)
+export default React.memo(Parent)
 
