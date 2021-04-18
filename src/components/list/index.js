@@ -6,9 +6,9 @@ import {
   List
 } from './style'
 
-function RecommendList (props) {
+function RecommendList(props) {
 
-  console.log('传给RecommendList props=', props)
+  console.log('传给RecommendList recommendList=', props.recommendList)
 
   return (
     <ListWrapper>
@@ -19,17 +19,19 @@ function RecommendList (props) {
             return (
               <ListItem key={item.id + index}>
                 <div className="img_wrapper">
-                    <img src={require(`@/assets/image/${item.picUrl}`).default}
-                        width="100%"
-                        height="100%"
-                        alt="music"
-                    />
+                  <img
+                    // src={require(`@/assets/image/${item.picUrl}`).default}
+                      src={item.picUrl}
+                      width="100%"
+                      height="100%"
+                      alt="music"
+                  />
                   <div className="play_count">
                     <i className="iconfont play">&#58961;</i>
                     <span className="count">{getCount(item.playCount)}</span>
                   </div>
                 </div>
-                <div className="desc">{item.name}</div>
+                <div className="desc">{item.name.substr(0,20)}</div>
               </ListItem>
             )
           })
@@ -37,6 +39,6 @@ function RecommendList (props) {
       </List>
     </ListWrapper>
   )
-  }
+}
 
 export default React.memo(RecommendList)

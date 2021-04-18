@@ -17,7 +17,7 @@ SwiperCore.use([Pagination, Autoplay])
 function Slider(props) {
   const { bannerList } = props
 
-  console.log('传给slider props=', props)
+  console.log('传给slider bannerList=', bannerList)
 
   return (
     <Swiper
@@ -47,7 +47,8 @@ function Slider(props) {
                   <img alt="推荐"
                       className="theImg"
                       height="100%"
-                      src={require('@/assets/image/' + slider.imageUrl).default}
+                    // src={require('@/assets/image/' + slider.imageUrl).default}
+                      src={slider.imageUrl}
                     // src={require('@/assets/image/111.jpg').default}
                     // src={'http://p1.music.126.net/ZYLJ2oZn74yUz5x8NBGkVA==/109951164331219056.jpg'}
                       width="100%"

@@ -52,11 +52,11 @@ export const ListItem = styled.div`
   .desc {
       overflow: hidden;
       margin-top: 2px;
-      padding: 0 2px;
+      padding: 0 2px 0 2px;
       height: 40px;
       text-align: center;
       font-size: ${style ['font-size-s']};
-      line-height: 2.0;
+      line-height: 1.45;
       color: ${style ['font-color-desc']};
     }
 `

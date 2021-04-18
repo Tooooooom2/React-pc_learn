@@ -1,37 +1,33 @@
 
-import React, { Profiler } from 'react'
+import React from 'react'
 
-function Parent() {
-
-  function onRenderCallback(...args) {
-    console.log('Profiler整体传参   ', args)
-    console.log('[id]              ', args[0])
-    console.log('[phase]           ', args[1])
-    console.log('[actualDuration]  ', args[2])
-    console.log('[baseDuration]    ', args[3])
-    console.log('[startTime]       ', args[4])
-    console.log('[commitTime]      ', args[5])
-    console.log('[interactions]    ', args[6])
+const defaultState = 0
+const reducer = (state = defaultState, action) => {
+  switch (action.type) {
+    case 'ADD':
+      return state + action.payload
+    default:
+      return state
   }
-
-  return (
-    <div>
-      <Profiler id="theFirst"
-          onRender={onRenderCallback}
-      >
-        <Child />
-      </Profiler>
-    </div>
-  )
 }
 
-function Child() {
-  return (
-    <div>
-      <button>Click</button>
-    </div>
-  )
+const actions = [
+  { type: 'ADD', payload: 0 },
+  { type: 'ADD', payload: 1 },
+  { type: 'ADD', payload: 2 }
+]
+
+const total = actions.reduce(reducer, 0)
+
+console.log(total)
+
+class Toggle extends React.Component {
+  render() {
+    return (
+      <h1>haha</h1>
+    )
+  }
 }
 
-export default React.memo(Parent)
+export default React.memo(Toggle)
 
