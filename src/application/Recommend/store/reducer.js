@@ -12,8 +12,10 @@ const defaultState = fromJS({
 export default (state = defaultState, action) => {
   switch (action.type) {
     case actionTypes.CHANGE_BANNER:
+      console.log('接口拿到了，要设置bannerList到redux啦~~~~~~~~~~~~~~~~~')
       return state.set('bannerList', action.data)
     case actionTypes.CHANGE_RECOMMEND_LIST:
+      console.log('接口拿到了，要设置recommendList到redux啦~~~~~~~~~~~~~~~~~')
       return state.set('recommendList', action.data)
     default:
       return state
