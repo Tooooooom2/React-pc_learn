@@ -36,12 +36,6 @@ function Recommend(props) {
   console.log('计算的bannerListJS=', bannerListJS)
   console.log('r计算的ecommendListJS=', recommendListJS)
 
-  // 这里加一个判断，因为数据是异步来的，当数据为空时不渲染内容
-  // 因为如果传了[]给子组件的话，轮播图会按[]初始化（猜测），后来传了新的完整数据也无法再正常拖动
-  if (bannerListJS.length == 0 || recommendListJS.length == 0) {
-    return null
-  }
-
   return (
     // Content 外包裹，给Scroll固定的父dom
     <Content>

@@ -19,6 +19,12 @@ function Slider(props) {
 
   console.log('传给slider bannerList=', bannerList)
 
+  // 这里加一个判断，因为数据是异步来的，当数据为空时不渲染内容
+  // 因为如果传了[]给slider的话，轮播图会按[]初始化（猜测），后来传了新的完整数据也无法再正常拖动
+  if (bannerList.length == 0) {
+    return null
+  }
+
   return (
     <Swiper
         onSlideChange={() => console.log('slide change')} // 切换slide触发
