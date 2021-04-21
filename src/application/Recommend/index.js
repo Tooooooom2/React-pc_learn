@@ -11,6 +11,8 @@ import * as actionTypes from './store/actionCreators' // 连接Recommend下的ac
 
 import store from '@/store/index'
 
+import { forceCheck } from 'react-lazyload'
+
 function Recommend(props) {
 
   console.log('传给Recommend的props=', props)
@@ -41,7 +43,7 @@ function Recommend(props) {
     <Content>
       {/* RedDiv 轮播图的红色背景边 */}
       <RedDiv />
-      <Scroll>
+      <Scroll onScroll={forceCheck}>
         {/* WhiteBackground 给Scroll拖动时保持的白底色 */}
         <WhiteBackground>
           <Slider bannerList={bannerListJS}></Slider>

@@ -6,6 +6,8 @@ import {
   List
 } from './style'
 
+import LazyLoad from 'react-lazyload' // 懒加载组件
+
 function RecommendList(props) {
 
   console.log('传给RecommendList recommendList=', props.recommendList)
@@ -19,13 +21,20 @@ function RecommendList(props) {
             return (
               <ListItem key={item.id + index}>
                 <div className="img_wrapper">
-                  <img
-                    // src={require(`@/assets/image/${item.picUrl}`).default}
-                      src={item.picUrl}
-                      width="100%"
-                      height="100%"
-                      alt="music"
-                  />
+                  <LazyLoad
+                      placeholder={<img src={require('@/assets/image/LocalImg.jpg').default}
+                          width="120"
+                          height="120"
+                                   />}
+                  >
+                    <img
+                      // src={require(`@/assets/image/${item.picUrl}`).default}
+                        src={item.picUrl}
+                        width="100%"
+                        height="100%"
+                        alt="music"
+                    />
+                  </LazyLoad>
                   <div className="play_count">
                     <i className="iconfont play">&#58961;</i>
                     <span className="count">{getCount(item.playCount)}</span>
@@ -37,7 +46,7 @@ function RecommendList(props) {
           })
         }
       </List>
-    </ListWrapper>
+    </ListWrapper >
   )
 }
 
