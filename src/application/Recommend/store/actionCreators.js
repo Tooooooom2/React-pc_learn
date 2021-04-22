@@ -13,6 +13,11 @@ export const changeRecommendList = (data) => ({
   data: fromJS(data)
 })
 
+export const changeEnterLoading = (data) => ({ // 针对loading的action
+  type: actionTypes.CHANGE_ENTER_LOADING,
+  data: data  // 开关loading只需要简单的bool，不用转immutable
+})
+
 export const getBannerList = () => {
   return (dispatch) => {
     request.getBannerRequest().then(res => {
@@ -29,8 +34,10 @@ export const getRecommendList = () => {
     request.getRecommendListRequest().then(res => {
       console.log(res.data.result)
       dispatch(changeRecommendList(res.data.result))
+      dispatch(changeEnterLoading(false)) // 不另开一个时事件了，推荐列表渲染完后就同时修改redux里的loading关闭
     }).catch(() => {
       console.log('推荐歌单数据传输错误')
     })
   }
 }
+

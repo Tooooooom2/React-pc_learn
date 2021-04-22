@@ -9,9 +9,9 @@ import { Content, RedDiv, WhiteBackground } from './style' // 移动端滑动组
 import { connect } from 'react-redux' // 增加和redux的连接
 import * as actionTypes from './store/actionCreators' // 连接Recommend下的actionTypes
 
-import store from '@/store/index'
+import { forceCheck } from 'react-lazyload' // 懒加载的监听事件
 
-import { forceCheck } from 'react-lazyload'
+import Loading from '@/baseUI/loading' // 加入手写的loading覆盖组件
 
 function Recommend(props) {
 
@@ -41,6 +41,8 @@ function Recommend(props) {
   return (
     // Content 外包裹，给Scroll固定的父dom
     <Content>
+      {/* <Loading /> */}
+      {props.enterloading ? <Loading /> : null}
       {/* RedDiv 轮播图的红色背景边 */}
       <RedDiv />
       <Scroll onScroll={forceCheck}>
@@ -62,7 +64,8 @@ const mapStateToProps = (state) => ({
   // 不然每次 diff 比对 props 的时候都是不一样的引用，还是导致不必要的重渲染，属于滥用 immutable
   // getIn immutable的语法，取state下的recommend下的bannerList的内容（取出来还是immutable格式）
   bannerList: state.getIn(['recommend', 'bannerList']),
-  recommendList: state.getIn(['recommend', 'recommendList'])
+  recommendList: state.getIn(['recommend', 'recommendList']),
+  enterloading: state.getIn(['recommend', 'enterLoading']) // 同样提取redux中的loading到组件的props里
 })
 
 // 映射redux的dispatch方法，return值会赋值到props上
@@ -80,55 +83,8 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-console.log('注意state的形式从赋默认值开始就一直是immutable，要具体查看可以转回js检查')
-console.log('~~~~store=', store)
-console.log('~~~~state=', store.getState())
-console.log('~~~~state转回js=', store.getState().toJS())
-console.log('~~~~state转回js=', store.getState().get('recommend'))
-console.log('~~~~state转回js=', store.getState().get('recommend').toJS())
-console.log('~~~~state转回js=', store.getState().getIn(['recommend', 'bannerList']))
-console.log('~~~~state转回js=', store.getState().getIn(['recommend', 'bannerList']).toJS())
-
 // export default React.memo(Recommend)
 
 // 将 ui 组件包装成容器组件
 // 这里可以理解为，用redux的connect方法，对Recommend组件执行了上面声明的mapStateToProps、mapDispatchToProps两个方法的props赋值；
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Recommend))
-
-  // //轮播列表-模拟数据
-  // const bannerList = [111, 222, 333].map(item => {
-  //   return { imageUrl: item + '.jpg' }
-  // })
-
-  // //推荐歌单列表-模拟数据
-  // const nameList = [
-  //   '朴树',
-  //   '张杰',
-  //   '张震岳',
-  //   '古巨基',
-  //   '潘玮柏',
-  //   '李健',
-  //   '陈楚生',
-  //   '罗志祥',
-  //   '陶喆',
-  //   '游鸿明',
-  //   '马天宇',
-  //   '谭咏麟',
-  //   '陈楚生',
-  //   '罗志祥',
-  //   '陶喆',
-  //   '游鸿明',
-  //   '马天宇',
-  //   '谭咏麟'
-  // ]
-
-  // // 歌手图片-模拟数据
-  // const recommendList = nameList.map((item, i) => {
-  //   // console.log(Math.round(Math.random()*100000))
-  //   return {
-  //     id: i + 1,
-  //     picUrl: 'singer_' + (i + 1) + '.jpg',
-  //     playCount: Math.round(Math.random() * 100000),
-  //     name: nameList[i]
-  //   }
-  // })
