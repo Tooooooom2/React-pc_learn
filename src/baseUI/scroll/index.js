@@ -11,8 +11,8 @@ const ScrollContainer = styled.div`
 
 const Scroll = forwardRef((props, ref) => {
 
-  console.log('【scroll】传递给scroll的 props =', props)
-  console.log('【scroll】传递给scroll的 ref =', ref)
+  // console.log('【scroll】传递给scroll的 props =', props)
+  // console.log('【scroll】传递给scroll的 ref =', ref)
 
   // bScroll，放具体的 better-scroll 的实例对象
   const [bScroll, setBScroll] = useState()
@@ -20,7 +20,7 @@ const Scroll = forwardRef((props, ref) => {
   // 传入的具体dom对象
   const scrollContaninerRef = useRef()
 
-  console.log('【scroll】获取到存入数据 scrollContaninerRef =', scrollContaninerRef)
+  // console.log('【scroll】获取到存入数据 scrollContaninerRef =', scrollContaninerRef)
 
   // 拆解props
   const { direction, click, refresh, bounceTop, bounceBottom } = props
