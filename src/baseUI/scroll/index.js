@@ -29,7 +29,7 @@ const Scroll = forwardRef((props, ref) => {
   // 每次render刷新后，往bScroll刷新实例对象
   useEffect(() => {
     const scroll = new BScroll(scrollContaninerRef.current, {
-      scrollX: direction === 'horizental',
+      scrollX: direction === 'horizontal',
       scrollY: direction === 'vertical',
       probeType: 3,
       click: click,
