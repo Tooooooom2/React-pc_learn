@@ -14,10 +14,9 @@ import { forceCheck } from 'react-lazyload' // 懒加载的监听事件
 import Loading from '@/baseUI/loading' // 加入手写的loading覆盖组件
 
 function Recommend(props) {
-
   console.log('传给Recommend的props=', props)
-  const { bannerList, recommendList } = props
-  const { getBannerDataDispatch, getRecommendListDataDispatch } = props
+  const { bannerList, recommendList } = props // redux的传值
+  const { getBannerDataDispatch, getRecommendListDataDispatch } = props // redux的传方法
 
   // 只在首次render创建后跑一次，执行connect传给props的两个方法，去调用接口获取新数据存入redux
   React.useEffect(() => {
@@ -83,8 +82,8 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-// export default React.memo(Recommend)
-
 // 将 ui 组件包装成容器组件
 // 这里可以理解为，用redux的connect方法，对Recommend组件执行了上面声明的mapStateToProps、mapDispatchToProps两个方法的props赋值；
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Recommend))
+
+// export default React.memo(Recommend)

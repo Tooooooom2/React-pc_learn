@@ -28,7 +28,6 @@ function RecommendList(props) {
                                    />}
                   >
                     <img
-                      // src={require(`@/assets/image/${item.picUrl}`).default}
                         src={item.picUrl}
                         width="100%"
                         height="100%"

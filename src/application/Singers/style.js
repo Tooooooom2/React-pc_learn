@@ -30,11 +30,14 @@ export const ListItem = styled.div`
   align-items: center;
   border-bottom: 1px solid ${style ['border-color']};
   .img_wrapper {
+    width:50px;
+    height:50px;
     margin-right: 20px;
+    display: flex;
+    align-items: center;
     img {
       border-radius: 3px;
-      width: 50px;
-      height: 50px;
+      width: 50px; 
     }
   }
   .name {
@@ -43,3 +46,9 @@ export const ListItem = styled.div`
     font-weight: 500;
   }
 `
+
+// display: table-cell;
+// vertical-align: middle;
+
+// display: flex;
+// align-items: center;

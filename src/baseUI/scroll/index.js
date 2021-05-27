@@ -9,6 +9,10 @@ const ScrollContainer = styled.div`
   overflow: scroll;
 `
 
+// 加入手写的loading覆盖组件
+import Loading_top_update from '@/baseUI/loading_top_update'
+import Loading_bottom_loadmore from '@/baseUI/loading_bottom_loadmore'
+
 const Scroll = forwardRef((props, ref) => {
 
   // console.log('【scroll】传递给scroll的 props =', props)
@@ -26,7 +30,7 @@ const Scroll = forwardRef((props, ref) => {
   const { direction, click, refresh, bounceTop, bounceBottom } = props
   const { pullUp, pullDown, onScroll } = props
 
-  // 每次render刷新后，往bScroll刷新实例对象
+  // 首次render刷新后，往bScroll建立实例对象
   useEffect(() => {
     const scroll = new BScroll(scrollContaninerRef.current, {
       scrollX: direction === 'horizontal',
@@ -39,12 +43,14 @@ const Scroll = forwardRef((props, ref) => {
       }
     })
     setBScroll(scroll)
-    return () => {
+    return () => { // 退出时注销实例对象
       setBScroll(null)
     }
     //eslint-disable-next-line
   }, []);
 
+  // 这三个都是一样的逻辑，若bScroll实例已建立，判断是否存在传入的这仨动作的回调函数，
+  // 存在则通过on绑定监听；退出时注销实例；
   // 若存在滑动的回调函数onScroll，
   useEffect(() => {
     if (!bScroll || !onScroll) return
@@ -55,7 +61,6 @@ const Scroll = forwardRef((props, ref) => {
       bScroll.off('scroll')
     }
   }, [onScroll, bScroll]) // 只在回调onScroll、实例对象bScroll变化时执行
-
   // 下面两个同理，改变时挂载上拉、下拉的回调
   useEffect(() => {
     if (!bScroll || !pullUp) return
@@ -69,7 +74,6 @@ const Scroll = forwardRef((props, ref) => {
       bScroll.off('scrollEnd')
     }
   }, [pullUp, bScroll])
-
   useEffect(() => {
     if (!bScroll || !pullDown) return
     bScroll.on('touchEnd', (pos) => {
@@ -106,8 +110,13 @@ const Scroll = forwardRef((props, ref) => {
   }))
 
   return (
-    <ScrollContainer ref={scrollContaninerRef}>
+    <ScrollContainer
+        ref={scrollContaninerRef}
+        // style={{position:'relative'}}
+    >
       {props.children}
+      {props.pullUpLoading ? <Loading_top_update /> : null} {/* 顶部 下拉加载动画 */}
+      {props.pullDownLoading ? <Loading_bottom_loadmore /> : null} {/* 底部 上拉刷新动画 */}
     </ScrollContainer>
   )
 })
