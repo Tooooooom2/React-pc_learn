@@ -15,6 +15,7 @@ console.log('模拟数据 推荐列表 =', categoryTypes)
 console.log('模拟数据 首字母 =', alphaTypes)
 
 function Singers(props) {
+
   const {
     singerList,
     enterLoading,
@@ -32,7 +33,7 @@ function Singers(props) {
 
   // 只在首次render创建后跑一次，执行首次获取热门歌手列表的逻辑
   React.useEffect(() => {
-    console.log('首次获取热门歌手列表的逻辑只在render后执行一次')
+    // console.log('首次获取热门歌手列表的逻辑只在render后执行一次')
     forProps_getHotSingerList()
   }, [])
 
@@ -86,15 +87,15 @@ function Singers(props) {
     )
   }
   // 注意，这里用的写法是每次render重绘，而不是限制它为[]，
-  // 确实是个缺陷，想彻底保持首次运行的话应该加上[]的，但是这里的防抖包裹的函数是会改变props导致重绘的
+  // 确实是个缺陷，想彻底保持首次运行的话应该加上[]的，但因为这里的防抖包裹的函数是会改变props导致重绘的
   // 这样子写就是在每一轮之间都重新声明了一次防抖函数，效果和[]的绝对独立也没差；
   // 总之规范的话，还是希望可以加上[]让它在整个周期中都保持独立；
   const handlePullUp = useMemo(()=>{
-    console.log('1111')
+    // console.log('1111')
     return debounce(handlePullUp_before,1000)
   })
   const handlePullDown = useMemo(()=>{
-    console.log('2222')
+    // console.log('2222')
     return debounce(handlePullDown_before,1000)
   })
 
@@ -121,6 +122,7 @@ function Singers(props) {
             pullUp={hasMorePage ? handlePullUp : () => { console.log('已经到底啦') }}
           // 顶部下拽的更新事件可以一直存在
             pullDown={handlePullDown}
+
             pullUpLoading={pullUpLoading}
             pullDownLoading={pullDownLoading}
 
