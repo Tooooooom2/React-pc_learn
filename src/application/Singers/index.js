@@ -11,10 +11,25 @@ import RenderSingerList from './RenderSingerList' // 具体的歌手列表组件
 import { forceCheck } from 'react-lazyload' // 懒加载的监听事件
 import { debounce } from '@/api/utils' // 函数防抖
 
-console.log('模拟数据 推荐列表 =', categoryTypes)
-console.log('模拟数据 首字母 =', alphaTypes)
+import { renderRoutes } from 'react-router-config'
+
+import { // 模拟的redux的Context对象、命名的两个常量
+  CategoryDataContext,
+  CHANGE_CATEGORY,
+  CHANGE_ALPHA
+} from '@/store/MySimulationRedux'
 
 function Singers(props) {
+
+  console.log('模拟数据 推荐列表 =', categoryTypes)
+  console.log('模拟数据 首字母 =', alphaTypes)
+
+  const { data, dispatch } = React.useContext(CategoryDataContext)
+  console.log('测试 模拟redux')
+  const use_data = data.toJS()
+  // console.log(use_data)
+  // console.log(dispatch)
+  // console.log('--over')
 
   const {
     singerList,
@@ -31,12 +46,6 @@ function Singers(props) {
     forProps_pullDownRefreshDispatch
   } = props // redux的传方法
 
-  // 只在首次render创建后跑一次，执行首次获取热门歌手列表的逻辑
-  React.useEffect(() => {
-    // console.log('首次获取热门歌手列表的逻辑只在render后执行一次')
-    forProps_getHotSingerList()
-  }, [])
-
   // 顶部 推荐列表的点击事件的响应回调函数
   function dothegetTypeSingers(cat, alp) {
     forProps_getSingerList(
@@ -45,17 +54,41 @@ function Singers(props) {
       alp || null)
   }
 
+  // 只在首次render创建后跑一次，执行首次获取热门歌手列表的逻辑
+  React.useEffect(() => {
+    // console.log('首次获取热门歌手列表的逻辑只在render后执行一次')
+    // forProps_getHotSingerList()
+    // 同理，原本进入页面必定是更新热门歌手，现在也改成根据模拟redux中是否有值判断
+    if (use_data.category || use_data.alpha) {
+      dothegetTypeSingers(use_data.category, use_data.alpha)
+    } else {
+      forProps_getHotSingerList()
+    }
+  }, [])
+
   // 监听分类、首字母的点击事件，改变选中，刷新搜索分类歌手列表
-  const [oldVal_category, setoldVal_category] = React.useState()
-  const [oldVal_alpha, setoldVal_alpha] = React.useState()
+  const [oldVal_category, setoldVal_category] = React.useState(use_data.category)
+  const [oldVal_alpha, setoldVal_alpha] = React.useState(use_data.alpha)
   const handleClick_category = (val) => {
     console.log('监听点击, 分类，改变 oldVal_category=', val)
     setoldVal_category(val)
+
+    dispatch({ // 对歌手分类、首字母的点击，增加disptach回调
+      type: CHANGE_CATEGORY,
+      data: val
+    })
+
     dothegetTypeSingers(val, oldVal_alpha) // 执行，获取当前搜索分类歌手列表
   }
   const handleClick_alpha = (val) => {
     console.log('监听点击，首字母，改变 oldVal_alpha=', val)
     setoldVal_alpha(val)
+
+    dispatch({ // 对歌手分类、首字母的点击，增加disptach回调
+      type: CHANGE_ALPHA,
+      data: val
+    })
+
     dothegetTypeSingers(oldVal_category, val) // 执行，获取当前搜索分类歌手列表
   }
 
@@ -90,17 +123,18 @@ function Singers(props) {
   // 确实是个缺陷，想彻底保持首次运行的话应该加上[]的，但因为这里的防抖包裹的函数是会改变props导致重绘的
   // 这样子写就是在每一轮之间都重新声明了一次防抖函数，效果和[]的绝对独立也没差；
   // 总之规范的话，还是希望可以加上[]让它在整个周期中都保持独立；
-  const handlePullUp = useMemo(()=>{
+  const handlePullUp = useMemo(() => {
     // console.log('1111')
-    return debounce(handlePullUp_before,1000)
+    return debounce(handlePullUp_before, 1000)
   })
-  const handlePullDown = useMemo(()=>{
+  const handlePullDown = useMemo(() => {
     // console.log('2222')
-    return debounce(handlePullDown_before,1000)
+    return debounce(handlePullDown_before, 1000)
   })
 
   return (
     <div>
+      {renderRoutes(props.route.routes)}
       <>
         <Horizen
             list={categoryTypes}

@@ -5,9 +5,10 @@ import App from './App'
 // 将react项目的根输出对象App绑定到根dom上
 ReactDOM.render(
   // React.StrictMode包裹了App，即在整个项目中都启动了严格模式
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // <React.StrictMode>
+  //   <App />
+  // </React.StrictMode>,
+  <App />,
   document.getElementById('root')
 )
 

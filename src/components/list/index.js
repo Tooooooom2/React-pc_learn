@@ -6,10 +6,18 @@ import {
   List
 } from './style'
 
+import { withRouter } from 'react-router-dom'
+
 import LazyLoad from 'react-lazyload' // 懒加载组件
+
+function dothejump(item, props) {
+  console.log('jump', item, props)
+  props.history.push(`/home/recommend/${item.id}`)
+}
 
 function RecommendList(props) {
 
+  console.log(props)
   console.log('传给RecommendList recommendList=', props.recommendList)
 
   return (
@@ -19,7 +27,9 @@ function RecommendList(props) {
         {
           props.recommendList.map((item, index) => {
             return (
-              <ListItem key={item.id + index}>
+              <ListItem key={item.id + index}
+                  onClick={() => { dothejump(item, props) }}
+              >
                 <div className="img_wrapper">
                   <LazyLoad
                       placeholder={<img src={require('@/assets/image/LocalImg.jpg').default}
@@ -49,4 +59,4 @@ function RecommendList(props) {
   )
 }
 
-export default React.memo(RecommendList)
+export default React.memo(withRouter(RecommendList))

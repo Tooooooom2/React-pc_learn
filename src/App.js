@@ -1,9 +1,14 @@
 import React from 'react'                               // 万物起源 ┗( ▔, ▔ )┛
 import { GlobalStyle } from './style'                   // 全局样式
-import { IconStyle } from './assets/iconfont/iconfont'  // 本地的图标库
+
+// import { IconStyle } from './assets/iconfont/iconfont'  // 本地的图标库
+import '@/assets/iconfont/iconfont.css' // 引入有bug，改回css引入
+
 import { Provider } from 'react-redux'                  // redux的Provider方法
 import store from './store/index'                       // redux的公共仓库（src/store/index.js）
 import routes from './routes/index'                     // 路由信息
+
+import { Data } from '@/store/MySimulationRedux' // 模拟的redux
 
 import { renderRoutes } from 'react-router-config'
 // 【react-router-config】插件的方法，转化传参中的路由信息→结构化的render标签（页面中props中可读）
@@ -21,8 +26,12 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <GlobalStyle />
-        <IconStyle />
-        {renderRoutes(routes)}
+        {/* <IconStyle /> */}
+
+        <Data>
+          {renderRoutes(routes)}
+        </Data>
+
       </BrowserRouter>
     </Provider>
   )

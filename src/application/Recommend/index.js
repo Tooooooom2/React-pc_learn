@@ -13,6 +13,8 @@ import { forceCheck } from 'react-lazyload' // 懒加载的监听事件
 
 import Loading from '@/baseUI/loading' // 加入手写的loading覆盖组件
 
+import { renderRoutes } from 'react-router-config'
+
 function Recommend(props) {
   console.log('传给Recommend的props=', props)
   const { bannerList, recommendList } = props // redux的传值
@@ -51,6 +53,7 @@ function Recommend(props) {
           <RecommendList recommendList={recommendListJS}></RecommendList>
         </WhiteBackground>
       </Scroll>
+      {renderRoutes(props.route.routes)}
     </Content>
   )
 }

@@ -97,6 +97,8 @@ const Scroll = forwardRef((props, ref) => {
   // 使用 ref 时自定义暴露给父组件的实例值
   useImperativeHandle(ref, () => ({
     refresh() {
+      console.log('Scroll内启动了refresh')
+      console.log('bScroll=',bScroll)
       if (bScroll) {
         bScroll.refresh()
         bScroll.scrollTo(0, 0)

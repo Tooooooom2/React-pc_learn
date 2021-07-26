@@ -8,29 +8,45 @@ import Recommend from '../application/Recommend'
 import Singers from '../application/Singers'
 import Rank from '../application/Rank'
 
+import Album from '../application/Album'
+
+import Singer from '../application/Singer'
+
 // 路由信息
 let the_router = [
   {
     path: '/',
+    exact: true,
+    render: () => (
+      <Redirect to={'/home/recommend'} />
+    )
+  },
+  {
+    path: '/home',
     component: Home,
     routes: [
       {
-        path: '/',
-        exact: true,
-        render: () => (
-          <Redirect to={'/recommend'} />
-        )
+        path: '/home/recommend',
+        component: Recommend,
+        routes:[
+          {
+            path: '/home/recommend/:id',
+            component: Album
+          }
+        ]
       },
       {
-        path: '/recommend',
-        component: Recommend
+        path: '/home/singers',
+        component: Singers,
+        routes: [
+          {
+            path: '/home/singers/:id',
+            component: Singer
+          }
+        ]
       },
       {
-        path: '/singers',
-        component: Singers
-      },
-      {
-        path: '/rank',
+        path: '/home/rank',
         component: Rank
       }
     ]

@@ -8,30 +8,30 @@ import { renderRoutes } from 'react-router-config'
 import { NavLink } from 'react-router-dom'          // NavLink类似一个div，点击触发router的跳转事件
 
 function Home(props) {
-  // console.log('Home页的props', props)
+  console.log('Home页的props', props)
   return (
     <div>
       <Top>
-        <span className="iconfont menu">&#xe64b;</span>
-        <span className="title">WebApp</span>
-        <span className="iconfont search">&#xe64b;</span>
+        <span className="iconfont menu">&#xe641;</span>
+        <span className="title">Web App</span>
+        <span className="iconfont search">&#xe623;</span>
       </Top>
       <Tab>
-        <NavLink to="/recommend"
+        <NavLink to="/home/recommend"
             activeClassName="selected"
         >
           <TabItem>
             <span > 推荐 </span>
-          </TabItem>Î
+          </TabItem>
         </NavLink>
-        <NavLink to="/singers"
+        <NavLink to="/home/singers"
             activeClassName="selected"
         >
           <TabItem>
             <span > 歌手 </span>
           </TabItem>
         </NavLink>
-        <NavLink to="/rank"
+        <NavLink to="/home/rank"
             activeClassName="selected"
         >
           <TabItem>

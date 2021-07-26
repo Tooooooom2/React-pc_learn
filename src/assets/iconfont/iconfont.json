@@ -1,0 +1,72 @@
+{
+  "id": "2183365",
+  "name": "testing",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "994692",
+      "name": "开始",
+      "font_class": "ai04",
+      "unicode": "e676",
+      "unicode_decimal": 58998
+    },
+    {
+      "icon_id": "4266163",
+      "name": "加",
+      "font_class": "jia",
+      "unicode": "e715",
+      "unicode_decimal": 59157
+    },
+    {
+      "icon_id": "19643723",
+      "name": "书架",
+      "font_class": "shujia",
+      "unicode": "e639",
+      "unicode_decimal": 58937
+    },
+    {
+      "icon_id": "338387",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "856957",
+      "name": "返回",
+      "font_class": "return",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "12097374",
+      "name": "菜单",
+      "font_class": "caidan",
+      "unicode": "e641",
+      "unicode_decimal": 58945
+    },
+    {
+      "icon_id": "3876384",
+      "name": "react",
+      "font_class": "react",
+      "unicode": "e64b",
+      "unicode_decimal": 58955
+    },
+    {
+      "icon_id": "13474473",
+      "name": "js",
+      "font_class": "js1",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "13743928",
+      "name": "html",
+      "font_class": "html1",
+      "unicode": "e686",
+      "unicode_decimal": 59014
+    }
+  ]
+}

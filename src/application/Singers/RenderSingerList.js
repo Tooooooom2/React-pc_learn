@@ -3,6 +3,8 @@ import { List, ListItem } from './style' // 配置style的dom
 
 import LazyLoad from 'react-lazyload' // 懒加载组件
 
+import { withRouter } from 'react-router-dom'
+
 // 渲染函数，返回歌手列表
 function RenderSingerList(props) {
 
@@ -11,12 +13,19 @@ function RenderSingerList(props) {
   let list = props.list.toJS()
 
   console.log('[RenderSingerList] 用于渲染歌手列表的list=', list)
+
+  const enterDetail = (id) => {
+    props.history.push(`/home/singers/${id}`)
+  }
+
   return (
     <List>
       {
         list.map((item) => {
           return (
-            <ListItem key={item.id}>
+            <ListItem key={item.id}
+                onClick={() => { enterDetail(item.id) }}
+            >
               <div
                   className="img_wrapper"
               >
@@ -42,4 +51,4 @@ function RenderSingerList(props) {
   )
 }
 
-export default React.memo(RenderSingerList)
+export default React.memo(withRouter(RenderSingerList))
