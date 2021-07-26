@@ -87,6 +87,7 @@ export const SongListWrapper = styled.div`
   left: 0;
   // top: 0;
   right: 0;
+  
   >div{
     position: absolute;
     left: 0;
