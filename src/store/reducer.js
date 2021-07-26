@@ -10,6 +10,7 @@ import { reducer as recommend_Reducer } from '../application/Recommend/store/ind
 import { reducer as singers_Reducer } from '../application/Singers/store/index'
 import { reducer as rank_Reducer } from '../application/Rank/store/index'
 import { reducer as albumReducer } from '../application/Album/store/index'
+import { reducer as singerInfoReducer } from '../application/Singer/store/index'
 
 export default combineReducers({
     // 之后开发具体功能模块的时候添加 reducer
@@ -17,5 +18,6 @@ export default combineReducers({
     recommend: recommend_Reducer,
     singers: singers_Reducer,
     rank: rank_Reducer,
-    album: albumReducer
+    album: albumReducer,
+    singerInfo:singerInfoReducer
 })

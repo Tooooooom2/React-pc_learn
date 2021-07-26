@@ -33,5 +33,8 @@ export default {
   },
   getAlbumDetailRequest: (id) => { // 根据id，获取歌单的具体歌曲列表内容
     return axiosInstance.get(`/playlist/detail?id=${id}`)
+  },
+  getSingerInfoRequest: (id) => { // 根据歌手id获取歌手的歌单列表
+    return axiosInstance.get(`/artists?id=${id}`)
   }
 }

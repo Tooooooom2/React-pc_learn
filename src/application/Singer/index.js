@@ -8,7 +8,12 @@ import {
 import Header from '@/baseUI/header/index'
 import CommonSongList from '@/application/CommonSongList' // 拆分几个小组件出来
 
+import { connect } from 'react-redux'
+import { getSingerInfo, changeEnterLoading } from './store/actionCreators'
+
 import Scroll from '@/baseUI/scroll/index'
+
+import Loading from './../../baseUI/loading/index'
 
 function Singer(props) {
   // 处理进出动作
@@ -17,118 +22,27 @@ function Singer(props) {
     setShowStatus(false)
   }
 
-  const artist = {
-    picUrl: 'https://p2.music.126.net/W__FCWFiyq0JdPtuLJoZVQ==/109951163765026271.jpg',
-    name: '薛之谦',
-    hotSongs: [
-      {
-        name: '我好像在哪见过你',
-        ar: [{ name: '薛之谦' }],
-        al: {
-          name: '薛之谦专辑'
-        }
-      },
-      {
-        name: '我好像在哪见过你',
-        ar: [{ name: '薛之谦' }],
-        al: {
-          name: '薛之谦专辑'
-        }
-      },
-      {
-        name: '我好像在哪见过你',
-        ar: [{ name: '薛之谦' }],
-        al: {
-          name: '薛之谦专辑'
-        }
-      },
-      {
-        name: '我好像在哪见过你',
-        ar: [{ name: '薛之谦' }],
-        al: {
-          name: '薛之谦专辑'
-        }
-      },
-      {
-        name: '我好像在哪见过你',
-        ar: [{ name: '薛之谦' }],
-        al: {
-          name: '薛之谦专辑'
-        }
-      },
-      {
-        name: '我好像在哪见过你',
-        ar: [{ name: '薛之谦' }],
-        al: {
-          name: '薛之谦专辑'
-        }
-      },
-      {
-        name: '我好像在哪见过你',
-        ar: [{ name: '薛之谦' }],
-        al: {
-          name: '薛之谦专辑'
-        }
-      },
-      {
-        name: '我好像在哪见过你',
-        ar: [{ name: '薛之谦' }],
-        al: {
-          name: '薛之谦专辑'
-        }
-      },
-      {
-        name: '我好像在哪见过你',
-        ar: [{ name: '薛之谦' }],
-        al: {
-          name: '薛之谦专辑'
-        }
-      },
-      {
-        name: '我好像在哪见过你',
-        ar: [{ name: '薛之谦' }],
-        al: {
-          name: '薛之谦专辑'
-        }
-      },
-      {
-        name: '我好像在哪见过你',
-        ar: [{ name: '薛之谦' }],
-        al: {
-          name: '薛之谦专辑'
-        }
-      },
-      {
-        name: '我好像在哪见过你',
-        ar: [{ name: '薛之谦' }],
-        al: {
-          name: '薛之谦专辑'
-        }
-      },
-      {
-        name: '我好像在哪见过你',
-        ar: [{ name: '薛之谦' }],
-        al: {
-          name: '薛之谦专辑'
-        }
-      },
-      {
-        name: '我好像在哪见过你',
-        ar: [{ name: '薛之谦' }],
-        al: {
-          name: '薛之谦专辑'
-        }
-      },
-      {
-        name: '我好像在哪见过你',
-        ar: [{ name: '薛之谦' }],
-        al: {
-          name: '薛之谦专辑'
-        }
-      }
-      // 省略 20 条
-    ]
-  }
+  const {
+    artist: immutableArtist,
+    songs: immutableSongs,
+    loading
+  } = props
+  const { getSingerDataDispatch } = props
+
+  console.log('loading=', loading)
+
+  const artist = immutableArtist ? immutableArtist.toJS() : []
+  const songs = immutableSongs ? immutableSongs.toJS() : []
+
+  console.log('artist', artist)
+  console.log('songs', songs)
+
+  React.useEffect(() => {
+    const id = props.match.params.id
+    console.log(id)
+    // getSingerDataDispatch (id);
+    getSingerDataDispatch(id)
+  }, [])
 
   // 图片初始高度
   const imageWrapper = React.useRef() // 绑定在顶部图片组件上
@@ -161,16 +75,16 @@ function Singer(props) {
     // console.log('percent=',percent)
 
     if (newY > 0) {
-      console.log('列表在往下拉，要放大顶部图片')
+      // console.log('列表在往下拉，要放大顶部图片')
       let nification = (HEADER_HEIGHT + newY) / HEADER_HEIGHT
-      console.log('放大倍率=', nification)
-      console.log(imageWrapper.current)
+      // console.log('放大倍率=', nification)
+      // console.log(imageWrapper.current)
       imageWrapper.current.style['transform'] = `scale(${nification})`
     } else if (-1 * newY <= (HEADER_HEIGHT - header_height)) {
-      console.log('列表向上，但还没到达header，慢慢计算，收藏按钮透明')
+      // console.log('列表向上，但还没到达header，慢慢计算，收藏按钮透明')
       let nification = ((HEADER_HEIGHT - header_height) + newY) / (HEADER_HEIGHT - header_height)
-      console.log('透明倍率=', nification)
-      console.log(collectButton.current)
+      // console.log('透明倍率=', nification)
+      // console.log(collectButton.current)
       collectButton.current.style['opacity'] = nification
     } else {
       // console.log('列表向上到达了header的高度，设置到此的内容为隐藏')
@@ -188,6 +102,7 @@ function Singer(props) {
         onExited={() => props.history.goBack()}
     >
       <Container>
+        {loading ? (<Loading></Loading>) : null}
         <Header
             title={artist.name}
             handleClick={handleBack}
@@ -207,8 +122,8 @@ function Singer(props) {
                   <p className="text"><i className="iconfont">&#xe715;</i>收藏</p>
                 </CollectButton>
                 <CommonSongList
-                    length={artist.hotSongs.length}
-                    list={artist.hotSongs}
+                    length={songs ? songs.length : 0}
+                    list={songs || []}
                     opacity={1}
                 />
               </div>
@@ -220,4 +135,22 @@ function Singer(props) {
   )
 }
 
-export default Singer
+// export default Singer
+// 映射 Redux 全局的 state 到组件的 props 上
+const mapStateToProps = state => ({
+  artist: state.getIn(['singerInfo', 'artist']),
+  songs: state.getIn(['singerInfo', 'songsOfArtist']),
+  loading: state.getIn(['singerInfo', 'loading'])
+})
+// 映射 dispatch 到 props 上
+const mapDispatchToProps = dispatch => {
+  return {
+    getSingerDataDispatch(id) {
+      dispatch(changeEnterLoading(true))
+      dispatch(getSingerInfo(id))
+    }
+  }
+}
+
+// 将 ui 组件包装成容器组件
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Singer))
